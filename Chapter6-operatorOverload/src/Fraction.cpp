@@ -1,14 +1,21 @@
 #include <iostream>
 #include <Fraction.h>
 
+
+// function: constractor, validation check, dev gcd
+//
+// Fraction := numerator / denominator
+//
 Fraction::Fraction(int numerator, int denominator){
     int _gcd;
 
+    // denominator cannot define 0 so I should define as error case. but it is not main task. iInstead of it, set the value to 0/1
     if(denominator == 0){
         std::cout << "arg (denominator) error" << std::endl;
         this->_denominator = 1;
         this->_numerator = 0;
     }else{
+        // dev gcd
         _gcd = gcd(numerator, denominator);
 
         if(_gcd != 0){
@@ -22,6 +29,10 @@ Fraction::Fraction(int numerator, int denominator){
     }
 }
 
+// ----- function: add -----
+// return:  Fraction
+// e.g.) Fraction{a, b} + Fraction{c, d}
+// -------------------------
 Fraction Fraction::operator+(const Fraction& num) const{
     int tmp_nume, tmp_deno;
 
@@ -31,6 +42,10 @@ Fraction Fraction::operator+(const Fraction& num) const{
     return Fraction{tmp_nume, tmp_deno};
 }
 
+// ----- function: sub -----
+// return:  Fraction
+// e.g.) Fraction{a, b} - Fraction{c, d}
+// -------------------------
 Fraction Fraction::operator-(const Fraction& num) const{
     int tmp_nume, tmp_deno;
 
@@ -40,6 +55,10 @@ Fraction Fraction::operator-(const Fraction& num) const{
    return Fraction{tmp_nume, tmp_deno};
 }
 
+// ----- function: mul -----
+// return:  Fraction
+// e.g.) Fraction{a, b} * Fraction{c, d}
+// -------------------------
 Fraction Fraction::operator*(const Fraction& num) const{
     int tmp_nume, tmp_deno;
 
@@ -49,6 +68,10 @@ Fraction Fraction::operator*(const Fraction& num) const{
     return Fraction{tmp_nume, tmp_deno};
 }
 
+// ----- function: dev -----
+// return:  Fraction
+// e.g.) Fraction{a, b} / Fraction{c, d}
+// -------------------------
 Fraction Fraction::operator/(const Fraction& num) const{
     int tmp_nume, tmp_deno;
 
@@ -58,26 +81,46 @@ Fraction Fraction::operator/(const Fraction& num) const{
     return Fraction{tmp_nume, tmp_deno};
 }
 
+// ----- function: compare -----
+// return:  bool
+// e.g.) Fraction{a, b} < Fraction{c, d}
+// -----------------------------
 bool Fraction::operator<(const Fraction& num) const{
     std::cout << ((double)this->_numerator)/this->_denominator << ", " << (double)(num._numerator)/num._denominator << std::endl;
     return ((double)this->_numerator/this->_denominator) < ((double)num._numerator/num._denominator);
 
 }
 
+
+// ----- function: compare -----
+// return:  bool
+// e.g.) Fraction{a, b} <= Fraction{c, d}
+// -----------------------------
 bool Fraction::operator<=(const Fraction& num) const{
     return !(*this > num);
 }
 
+// ----- function: compare -----
+// return:  bool
+// e.g.) Fraction{a, b} > Fraction{c, d}
+// -----------------------------
 bool Fraction::operator>(const Fraction& num) const{
     std::cout << ((double)this->_numerator)/this->_denominator << ", " << (double)(num._numerator)/num._denominator << std::endl;
     return ((double)this->_numerator)/this->_denominator > ((double)num._numerator)/num._denominator;
 }
 
+// ----- function: compare -----
+// return:  bool
+// e.g.) Fraction{a, b} >= Fraction{c, d}
+// -----------------------------
 bool Fraction::operator>=(const Fraction& num) const{
     return !(*this < num);
 }
 
-
+// ----- function: display fraction -----
+// return:  void
+// e.g.) frac.show()
+// ---------------------------------------
 void Fraction::show() const{
     if(this->_denominator == 1){
         std::cout << this->_numerator << std::endl;
